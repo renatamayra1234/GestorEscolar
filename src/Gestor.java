@@ -1,12 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author guest.jb
- */
 public class Gestor extends javax.swing.JFrame {
 
     /**
@@ -42,6 +35,11 @@ public class Gestor extends javax.swing.JFrame {
         lblsenha.setText("Senha");
 
         btnentrar.setText("ENTRAR");
+        btnentrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnentrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,6 +84,30 @@ public class Gestor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnentrarActionPerformed
+        try {
+        Connection conn = conexao.Conexao.conectar();
+
+        String sql = "SELECT * FROM usuario WHERE usuario=? and senha=?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+
+        stmt.setString(1, txtlogin.getText());
+        stmt.setString(2, new String(jpsenha.getPassword()));
+
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            JOptionPane.showMessageDialog(null, "Login realizado!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos!");
+        }
+
+        } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Erro!");
+    }
+
+    }//GEN-LAST:event_btnentrarActionPerformed
 
     /**
      * @param args the command line arguments
