@@ -1,3 +1,7 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 public class Gestor extends javax.swing.JFrame {
@@ -87,22 +91,21 @@ public class Gestor extends javax.swing.JFrame {
 
     private void btnentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnentrarActionPerformed
         try {
-        Connection conn = conexao.Conexao.conectar();
+            Connection conn = conexao.Conexao.conectar();
 
-        String sql = "SELECT * FROM usuario WHERE usuario=? and senha=?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
+            String sql = "SELECT * FROM login WHERE usuario=? and senha=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
 
-        stmt.setString(1, txtlogin.getText());
-        stmt.setString(2, new String(jpsenha.getPassword()));
-
-        ResultSet rs = stmt.executeQuery();
-
-        if (rs.next()) {
-            JOptionPane.showMessageDialog(null, "Login realizado!");
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos!");
-        }
-
+            stmt.setString(1, txtlogin.getText());
+            stmt.setString(2, new String(jpsenha.getPassword()));
+            
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Login realizado!");
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos!");
+            }
         } catch (Exception e) {
         JOptionPane.showMessageDialog(null, "Erro!");
     }
