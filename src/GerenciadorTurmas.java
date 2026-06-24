@@ -24,7 +24,7 @@ public class GerenciadorTurmas extends javax.swing.JFrame {
         txtturma = new javax.swing.JTextField();
         btnlistar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtlistar = new javax.swing.JTextArea();
+        txta_listar = new javax.swing.JTextArea();
         btnvoltar = new javax.swing.JButton();
         btncadastrar = new javax.swing.JButton();
 
@@ -48,9 +48,9 @@ public class GerenciadorTurmas extends javax.swing.JFrame {
             }
         });
 
-        txtlistar.setColumns(20);
-        txtlistar.setRows(5);
-        jScrollPane1.setViewportView(txtlistar);
+        txta_listar.setColumns(20);
+        txta_listar.setRows(5);
+        jScrollPane1.setViewportView(txta_listar);
 
         btnvoltar.setText("Voltar");
         btnvoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -132,14 +132,14 @@ public class GerenciadorTurmas extends javax.swing.JFrame {
     PreparedStatement stmt = conn.prepareStatement(sql);
     ResultSet rs = stmt.executeQuery();
 
-    jTextArea1.setText("");
+    txta_listar.setText("");
     while (rs.next()) {
-        jTextArea1.append("ID: " + rs.getInt("id_aluno") + "\n");
-        jTextArea1.append("Nome: " + rs.getString("nome") + "\n");
-        jTextArea1.append("Idade: " + rs.getInt("idade") + "\n");
-        jTextArea1.append("Telefone: " + rs.getString("telefone") + "\n");
-        jTextArea1.append("Endereço: " + rs.getString("endereco") + "\n");
-        jTextArea1.append("------------------------\n");
+        txta_listar.append("ID: " + rs.getInt("id_aluno") + "\n");
+        txta_listar.append("Nome: " + rs.getString("nome") + "\n");
+        txta_listar.append("Idade: " + rs.getInt("idade") + "\n");
+        txta_listar.append("Telefone: " + rs.getString("telefone") + "\n");
+        txta_listar.append("Endereço: " + rs.getString("endereco") + "\n");
+        txta_listar.append("------------------------\n");
     }
     stmt.close();
     conn.close();
@@ -198,7 +198,7 @@ public class GerenciadorTurmas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblturma;
     private javax.swing.JLabel lblturmas;
-    private javax.swing.JTextArea txtlistar;
+    private javax.swing.JTextArea txta_listar;
     private javax.swing.JTextField txtturma;
     // End of variables declaration//GEN-END:variables
 }
