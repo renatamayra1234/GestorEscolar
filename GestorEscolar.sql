@@ -30,7 +30,8 @@ foreign key(id_aluno) references aluno(id_aluno)
 );
 
 insert into login(usuario,senha)
-values("Jeanine","jeanine@gmail.com");
+values("Jeanine","bocasanta"),
+("Bia","123"),("Carol","bonita");
 
 select * from login;
 insert into turma(nome)
