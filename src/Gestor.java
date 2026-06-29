@@ -34,9 +34,9 @@ public class Gestor extends javax.swing.JFrame {
         lblgestor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblgestor.setText("Gestor");
 
-        lblusuario.setText("Usuário");
+        lblusuario.setText("Usuário:");
 
-        lblsenha.setText("Senha");
+        lblsenha.setText("Senha:");
 
         btnentrar.setText("ENTRAR");
         btnentrar.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +66,7 @@ public class Gestor extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(159, 159, 159)
                         .addComponent(btnentrar)))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
