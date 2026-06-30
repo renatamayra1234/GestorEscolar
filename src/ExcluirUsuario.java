@@ -1,12 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-/**
- *
- * @author guest.jb
- */
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 public class ExcluirUsuario extends javax.swing.JFrame {
 
     /**
@@ -94,10 +88,10 @@ public class ExcluirUsuario extends javax.swing.JFrame {
         try{
             Connection conn = conexao.Conexao.conectar();
 
-            String sql = "DELETE FROM login WHERE id_login=?";
+            String sql = "DELETE FROM login WHERE id_usuario=?";
             PreparedStatement stmt = conn.prepareStatement (sql);
             stmt.setInt(1, Integer.parseInt(txtid.getText()));
-            stmt.execute();
+            stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Deletado!");
             stmt.close();
             conn.close();

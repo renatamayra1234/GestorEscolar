@@ -109,17 +109,17 @@ public class CadastroUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btncadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncadastrarActionPerformed
-CadastroUsuario tela = new CadastroUsuario();
+GerenciarUsuarios tela = new GerenciarUsuarios();
     tela.setVisible(true);
 
     this.dispose();
         
         try{
             Connection conn = conexao.Conexao.conectar();
-            String sql = "UPDATE usuario SET usuario=?, senha=?";
+            String sql = "UPDATE login SET usuario=?, senha=? WHERE id_usuario=?";
             PreparedStatement stmt = conn.prepareStatement (sql);
-            stmt.setString(2, txtcadastro.getText ());
-            stmt.setInt (4, Integer.parseInt(txtsenha.getText()));
+            stmt.setString(1, txtcadastro.getText ());
+            stmt.setInt (2, Integer.parseInt(txtsenha.getText()));
             stmt.execute();
             JOptionPane.showMessageDialog(null, "Cadastrado");
             stmt.close();

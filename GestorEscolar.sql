@@ -11,7 +11,11 @@ create table turma(
 id_turma int auto_increment primary key,
 nome varchar(100) not null
 );
-
+create table professor(
+id_prof int auto_increment primary key,
+usuario varchar(100) not null,
+senha varchar (21) not null
+);
 create table aluno(
 id_aluno int auto_increment primary key,
 nome varchar(100) not null,
@@ -33,11 +37,18 @@ insert into login(usuario,senha)
 values("Jeanine","bocasanta"),
 ("Bia","123"),("Carol","bonita");
 
-select * from login;
 insert into turma(nome)
 values
 ("Jovem Programador"),
 ("Técnico em Administração");
+
+insert into professor(usuario,senha)
+values
+("Clarise","220022"),
+("Hobert","00000000"),
+("Igor","1234"),
+("Margaret","senha"),
+("Antonio","nsei");
 
 insert into aluno(nome,idade,telefone,endereco,id_turma)
 values
@@ -65,3 +76,4 @@ on a.id_turma = t.id_turma
 left join nota n
 on a.id_aluno = n.id_aluno
 group by a.id_aluno,a.nome,t.nome;
+select*from login;
