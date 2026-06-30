@@ -3,19 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 /**
  *
  * @author guest.jb
  */
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import javax.swing.JOptionPane;
-public class CadastroUsuario extends javax.swing.JFrame {
+public class EdicaoUsuario extends javax.swing.JFrame {
 
     /**
-     * Creates new form CadastroUsuario
+     * Creates new form EdicaoUsuario
      */
-    public CadastroUsuario() {
+    public EdicaoUsuario() {
         initComponents();
     }
 
@@ -28,27 +28,27 @@ public class CadastroUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblusuario = new javax.swing.JLabel();
-        lblcadastro = new javax.swing.JLabel();
-        lblsenha = new javax.swing.JLabel();
-        btncadastrar = new javax.swing.JButton();
-        txtcadastro = new javax.swing.JTextField();
+        lbledicao = new javax.swing.JLabel();
+        lblnome = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtnome = new javax.swing.JTextField();
         txtsenha = new javax.swing.JTextField();
+        btnatualizar = new javax.swing.JButton();
         btnvoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblusuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblusuario.setText("CADASTRO USUÁRIO");
+        lbledicao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbledicao.setText("Edição Usuário");
 
-        lblcadastro.setText("Usuário");
+        lblnome.setText("Nome");
 
-        lblsenha.setText("Senha");
+        jLabel2.setText("Senha");
 
-        btncadastrar.setText("CADASTRAR");
-        btncadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btnatualizar.setText("ATUALIZAR");
+        btnatualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btncadastrarActionPerformed(evt);
+                btnatualizarActionPerformed(evt);
             }
         });
 
@@ -66,62 +66,57 @@ public class CadastroUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(lblusuario))
+                        .addGap(145, 145, 145)
+                        .addComponent(lbledicao))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblcadastro)
-                            .addComponent(lblsenha))
-                        .addGap(40, 40, 40)
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(lblnome))
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtcadastro)
-                            .addComponent(txtsenha, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))))
+                            .addComponent(txtsenha, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(txtnome))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(btnvoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
-                .addComponent(btncadastrar)
-                .addGap(62, 62, 62))
+                .addGap(48, 48, 48)
+                .addComponent(btnvoltar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addComponent(btnatualizar)
+                .addGap(78, 78, 78))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(lblusuario)
-                .addGap(38, 38, 38)
+                .addGap(46, 46, 46)
+                .addComponent(lbledicao)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblcadastro)
-                    .addComponent(txtcadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                    .addComponent(lblnome)
+                    .addComponent(txtnome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblsenha)
+                    .addComponent(jLabel2)
                     .addComponent(txtsenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btncadastrar)
+                    .addComponent(btnatualizar)
                     .addComponent(btnvoltar))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btncadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncadastrarActionPerformed
-CadastroUsuario tela = new CadastroUsuario();
-    tela.setVisible(true);
-
-    this.dispose();
-        
+    private void btnatualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnatualizarActionPerformed
         try{
             Connection conn = conexao.Conexao.conectar();
-            String sql = "UPDATE usuario SET usuario=?, senha=?";
+            String sql = "UPDATE login SET usuario=?, senha=?";
             PreparedStatement stmt = conn.prepareStatement (sql);
-            stmt.setString(2, txtcadastro.getText ());
-            stmt.setInt (4, Integer.parseInt(txtsenha.getText()));
+            stmt.setString(2, txtnome.getText ());
+            stmt.setInt (3, Integer.parseInt(txtsenha.getText()));
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Cadastrado");
+            JOptionPane.showMessageDialog(null, "Atualizado");
             stmt.close();
             conn.close();
                    
@@ -129,10 +124,10 @@ CadastroUsuario tela = new CadastroUsuario();
 }catch (Exception e){
 e.printStackTrace();
 }
-    }//GEN-LAST:event_btncadastrarActionPerformed
+    }//GEN-LAST:event_btnatualizarActionPerformed
 
     private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
-         Gestor tela = new Gestor();
+        EdicaoUsuario tela = new EdicaoUsuario();
        tela.setVisible (true);
        
        this.dispose();
@@ -155,31 +150,31 @@ e.printStackTrace();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EdicaoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EdicaoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EdicaoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EdicaoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroUsuario().setVisible(true);
+                new EdicaoUsuario().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btncadastrar;
+    private javax.swing.JButton btnatualizar;
     private javax.swing.JButton btnvoltar;
-    private javax.swing.JLabel lblcadastro;
-    private javax.swing.JLabel lblsenha;
-    private javax.swing.JLabel lblusuario;
-    private javax.swing.JTextField txtcadastro;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lbledicao;
+    private javax.swing.JLabel lblnome;
+    private javax.swing.JTextField txtnome;
     private javax.swing.JTextField txtsenha;
     // End of variables declaration//GEN-END:variables
 }

@@ -90,6 +90,12 @@ public class Gestor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnentrarActionPerformed
+      
+
+    this.dispose();
+
+            
+        
         try {
             Connection conn = conexao.Conexao.conectar();
 
@@ -102,7 +108,8 @@ public class Gestor extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Login realizado!");
-            
+                GerenciarUsuarios tela = new GerenciarUsuarios();
+                tela.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos!");
             }

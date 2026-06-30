@@ -113,7 +113,7 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnusuarioActionPerformed
-         Cadastro tela = new Cadastro ();
+         CadastroUsuario tela = new CadastroUsuario ();
         tela.setVisible (true);
         
         this.dispose();
@@ -122,21 +122,21 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnusuarioActionPerformed
 
     private void btnlistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlistarActionPerformed
-        Visualizacao tela = new Visualizacao ();
+        ListarUsuario tela = new ListarUsuario ();
         tela.setVisible (true);
         
         this.dispose();
     }//GEN-LAST:event_btnlistarActionPerformed
 
     private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
-        Edicao tela = new Edicao ();
+        EdicaoUsuario tela = new EdicaoUsuario ();
         tela.setVisible (true);
         
         this.dispose();
     }//GEN-LAST:event_btneditarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Exclusao tela = new Exclusao ();
+        ExcluirUsuario tela = new ExcluirUsuario ();
         tela.setVisible (true);
         
         this.dispose();
