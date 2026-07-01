@@ -77,3 +77,7 @@ left join nota n
 on a.id_aluno = n.id_aluno
 group by a.id_aluno,a.nome,t.nome;
 select*from login;
+select*from aluno;
+select*from turma;
+select*from nota;
+
