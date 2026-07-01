@@ -34,7 +34,7 @@ public class Gestor extends javax.swing.JFrame {
         lblgestor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblgestor.setText("Gestor");
 
-        lblusuario.setText("Usu�rio:");
+        lblusuario.setText("Usuário:");
 
         lblsenha.setText("Senha:");
 
@@ -90,32 +90,40 @@ public class Gestor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnentrarActionPerformed
-      
 
-    this.dispose();
+        if (txtlogin.getText().trim().isEmpty() || jpsenha.getPassword().length == 0) {
+            JOptionPane.showMessageDialog(null, "Preencha usuário e senha!");
+            return;
+        }
 
-            
-        
         try {
             Connection conn = conexao.Conexao.conectar();
+            if (conn == null) {
+                JOptionPane.showMessageDialog(null, "Não foi possível conectar ao banco de dados!");
+                return;
+            }
 
             String sql = "SELECT * FROM login WHERE usuario=? and senha=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, txtlogin.getText());
             stmt.setString(2, new String(jpsenha.getPassword()));
-            
+
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Login realizado!");
-                GerenciarUsuarios tela = new GerenciarUsuarios();
+                this.dispose();
+                MenuPrincipal tela = new MenuPrincipal();
                 tela.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null, "Usu�rio ou senha incorretos!");
+                JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos!");
             }
+            stmt.close();
+            conn.close();
         } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Erro!");
-    }
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao tentar fazer login!");
+        }
 
     }//GEN-LAST:event_btnentrarActionPerformed
 

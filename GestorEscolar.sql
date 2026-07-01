@@ -35,7 +35,8 @@ foreign key(id_aluno) references aluno(id_aluno)
 
 insert into login(usuario,senha)
 values("Jeanine","bocasanta"),
-("Bia","123"),("Carol","bonita");
+("Bia","123"),("Carol","bonita"),
+("bia","123"),("admin","admin"),("teste","teste123"),("professor","prof2026");
 
 insert into turma(nome)
 values

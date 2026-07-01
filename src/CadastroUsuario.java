@@ -39,9 +39,9 @@ public class CadastroUsuario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblusuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblusuario.setText("CADASTRO USU�RIO");
+        lblusuario.setText("CADASTRO USUÁRIO");
 
-        lblcadastro.setText("Usu�rio");
+        lblcadastro.setText("Usuário");
 
         lblsenha.setText("Senha");
 
@@ -109,30 +109,34 @@ public class CadastroUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btncadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncadastrarActionPerformed
-GerenciarUsuarios tela = new GerenciarUsuarios();
-    tela.setVisible(true);
+        if (txtcadastro.getText().trim().isEmpty() || txtsenha.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preencha usuário e senha!");
+            return;
+        }
 
-    this.dispose();
-        
         try{
             Connection conn = conexao.Conexao.conectar();
-            String sql = "UPDATE login SET usuario=?, senha=? WHERE id_usuario=?";
+            String sql = "INSERT INTO login (usuario, senha) VALUES (?, ?)";
             PreparedStatement stmt = conn.prepareStatement (sql);
             stmt.setString(1, txtcadastro.getText ());
-            stmt.setInt (2, Integer.parseInt(txtsenha.getText()));
+            stmt.setString(2, txtsenha.getText());
             stmt.execute();
             JOptionPane.showMessageDialog(null, "Cadastrado");
             stmt.close();
             conn.close();
-                   
-                             
+
+            GerenciarUsuarios tela = new GerenciarUsuarios();
+            tela.setVisible(true);
+            this.dispose();
+
 }catch (Exception e){
 e.printStackTrace();
+JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário!");
 }
     }//GEN-LAST:event_btncadastrarActionPerformed
 
     private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
-         Gestor tela = new Gestor();
+         GerenciarUsuarios tela = new GerenciarUsuarios();
        tela.setVisible (true);
        
        this.dispose();

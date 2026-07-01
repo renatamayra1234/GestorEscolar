@@ -29,6 +29,8 @@ public class EdicaoUsuario extends javax.swing.JFrame {
     private void initComponents() {
 
         lbledicao = new javax.swing.JLabel();
+        lblid = new javax.swing.JLabel();
+        txtid = new javax.swing.JTextField();
         lblnome = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtnome = new javax.swing.JTextField();
@@ -39,7 +41,9 @@ public class EdicaoUsuario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lbledicao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbledicao.setText("Edi��o Usu�rio");
+        lbledicao.setText("Edição Usuário");
+
+        lblid.setText("ID do usuário");
 
         lblnome.setText("Nome");
 
@@ -71,10 +75,12 @@ public class EdicaoUsuario extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblid)
                             .addComponent(jLabel2)
                             .addComponent(lblnome))
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtid, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addComponent(txtsenha, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addComponent(txtnome))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -90,7 +96,11 @@ public class EdicaoUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(lbledicao)
-                .addGap(29, 29, 29)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblid)
+                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblnome)
                     .addComponent(txtnome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -109,25 +119,37 @@ public class EdicaoUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnatualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnatualizarActionPerformed
+        if (txtid.getText().trim().isEmpty() || txtnome.getText().trim().isEmpty() || txtsenha.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preencha ID, nome e senha!");
+            return;
+        }
+
         try{
+            int id = Integer.parseInt(txtid.getText().trim());
             Connection conn = conexao.Conexao.conectar();
-            String sql = "UPDATE login SET usuario=?, senha=?";
+            String sql = "UPDATE login SET usuario=?, senha=? WHERE id_usuario=?";
             PreparedStatement stmt = conn.prepareStatement (sql);
-            stmt.setString(2, txtnome.getText ());
-            stmt.setInt (3, Integer.parseInt(txtsenha.getText()));
-            stmt.execute();
-            JOptionPane.showMessageDialog(null, "Atualizado");
+            stmt.setString(1, txtnome.getText ());
+            stmt.setString(2, txtsenha.getText());
+            stmt.setInt(3, id);
+            int linhas = stmt.executeUpdate();
+            if (linhas > 0) {
+                JOptionPane.showMessageDialog(null, "Atualizado");
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhum usuário encontrado com esse ID!");
+            }
             stmt.close();
             conn.close();
-                   
-                             
+}catch (NumberFormatException nfe){
+    JOptionPane.showMessageDialog(null, "ID inválido! Informe apenas números.");
 }catch (Exception e){
 e.printStackTrace();
+JOptionPane.showMessageDialog(null, "Erro ao atualizar usuário!");
 }
     }//GEN-LAST:event_btnatualizarActionPerformed
 
     private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
-        EdicaoUsuario tela = new EdicaoUsuario();
+        GerenciarUsuarios tela = new GerenciarUsuarios();
        tela.setVisible (true);
        
        this.dispose();
@@ -173,7 +195,9 @@ e.printStackTrace();
     private javax.swing.JButton btnvoltar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lbledicao;
+    private javax.swing.JLabel lblid;
     private javax.swing.JLabel lblnome;
+    private javax.swing.JTextField txtid;
     private javax.swing.JTextField txtnome;
     private javax.swing.JTextField txtsenha;
     // End of variables declaration//GEN-END:variables
