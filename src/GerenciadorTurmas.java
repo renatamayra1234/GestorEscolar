@@ -119,7 +119,7 @@ public class GerenciadorTurmas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
-        Gestor tela = new Gestor();
+        MenuPrincipal tela = new MenuPrincipal();
        tela.setVisible (true);
        
        this.dispose();
@@ -128,17 +128,14 @@ public class GerenciadorTurmas extends javax.swing.JFrame {
     private void btnlistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlistarActionPerformed
          try {
     Connection conn = conexao.Conexao.conectar();
-    String sql = "select * from aluno";
+    String sql = "select * from turma";
     PreparedStatement stmt = conn.prepareStatement(sql);
     ResultSet rs = stmt.executeQuery();
 
     txta_listar.setText("");
     while (rs.next()) {
-        txta_listar.append("ID: " + rs.getInt("id_aluno") + "\n");
+        txta_listar.append("ID: " + rs.getInt("id_turma") + "\n");
         txta_listar.append("Nome: " + rs.getString("nome") + "\n");
-        txta_listar.append("Idade: " + rs.getInt("idade") + "\n");
-        txta_listar.append("Telefone: " + rs.getString("telefone") + "\n");
-        txta_listar.append("Endereço: " + rs.getString("endereco") + "\n");
         txta_listar.append("------------------------\n");
     }
     stmt.close();
@@ -149,11 +146,30 @@ public class GerenciadorTurmas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnlistarActionPerformed
 
     private void txtturmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtturmaActionPerformed
-        // TODO add your handling code here:
+        btncadastrarActionPerformed(evt);
     }//GEN-LAST:event_txtturmaActionPerformed
 
     private void btncadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncadastrarActionPerformed
-        // TODO add your handling code here:
+        if (txtturma.getText().trim().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Informe o nome da turma!");
+            return;
+        }
+        try {
+            Connection conn = conexao.Conexao.conectar();
+            String sql = "INSERT INTO turma (nome) VALUES (?)";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, txtturma.getText().trim());
+            stmt.execute();
+            stmt.close();
+            conn.close();
+
+            javax.swing.JOptionPane.showMessageDialog(null, "Turma cadastrada!");
+            txtturma.setText("");
+            btnlistarActionPerformed(evt);
+        } catch (Exception e) {
+            e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(null, "Erro ao cadastrar turma!");
+        }
     }//GEN-LAST:event_btncadastrarActionPerformed
 
     /**

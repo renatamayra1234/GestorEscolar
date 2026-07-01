@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /**
  *
  * @author guest.jb
@@ -32,7 +36,7 @@ public class ListarUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnlistar.setText("Listar Usu�rio");
+        btnlistar.setText("Listar Usuário");
         btnlistar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnlistarActionPerformed(evt);
@@ -80,11 +84,27 @@ public class ListarUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnlistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlistarActionPerformed
-        // TODO add your handling code here:
+        try {
+            Connection conn = conexao.Conexao.conectar();
+            String sql = "SELECT * FROM login";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            txtlistar.setText("");
+            while (rs.next()) {
+                txtlistar.append("ID: " + rs.getInt("id_usuario") + "\n");
+                txtlistar.append("Usuário: " + rs.getString("usuario") + "\n");
+                txtlistar.append("------------------------\n");
+            }
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnlistarActionPerformed
 
     private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
-        Gestor tela = new Gestor();
+        GerenciarUsuarios tela = new GerenciarUsuarios();
        tela.setVisible (true);
        
        this.dispose();

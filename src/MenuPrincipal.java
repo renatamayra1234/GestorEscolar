@@ -34,14 +34,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnnotas.setText("LANÇAR NOTAS");
+        btnnotas.setText("LANÃ‡AR NOTAS");
         btnnotas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnnotasActionPerformed(evt);
             }
         });
 
-        btrelatorio.setText("RELATÓRIOS");
+        btrelatorio.setText("RELATÃ“RIOS");
         btrelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btrelatorioActionPerformed(evt);
@@ -49,6 +49,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         btnsair.setText("LOGOUT");
+        btnsair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsairActionPerformed(evt);
+            }
+        });
 
         btnusuario.setText("GERENCIAR USUARIOS");
         btnusuario.addActionListener(new java.awt.event.ActionListener() {
@@ -58,6 +63,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         jButton1.setText("GERENCIAR TURMAS");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnalunos.setText("GERENCIAR ALUNOS");
         btnalunos.addActionListener(new java.awt.event.ActionListener() {
@@ -105,20 +115,40 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnnotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnotasActionPerformed
-        // TODO add your handling code here:
+        LancamentoNotas tela = new LancamentoNotas();
+        tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnnotasActionPerformed
 
     private void btrelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btrelatorioActionPerformed
-        // TODO add your handling code here:
+        RelatoriosConsultas tela = new RelatoriosConsultas();
+        tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btrelatorioActionPerformed
 
     private void btnusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnusuarioActionPerformed
-        // TODO add your handling code here:
+        GerenciarUsuarios tela = new GerenciarUsuarios();
+        tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnusuarioActionPerformed
 
     private void btnalunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnalunosActionPerformed
-        // TODO add your handling code here:
+        CadastroAluno tela = new CadastroAluno();
+        tela.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnalunosActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        GerenciadorTurmas tela = new GerenciadorTurmas();
+        tela.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsairActionPerformed
+        Gestor tela = new Gestor();
+        tela.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnsairActionPerformed
 
     /**
      * @param args the command line arguments

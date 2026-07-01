@@ -77,7 +77,7 @@ public class ExcluirUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
-        Gestor tela = new Gestor();
+        GerenciarUsuarios tela = new GerenciarUsuarios();
         tela.setVisible (true);
 
         this.dispose();
@@ -85,18 +85,30 @@ public class ExcluirUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnvoltarActionPerformed
 
     private void btnexcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexcluirActionPerformed
+        if (txtid.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Informe o ID do usuário!");
+            return;
+        }
         try{
             Connection conn = conexao.Conexao.conectar();
 
             String sql = "DELETE FROM login WHERE id_usuario=?";
             PreparedStatement stmt = conn.prepareStatement (sql);
             stmt.setInt(1, Integer.parseInt(txtid.getText()));
-            stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Deletado!");
+            int linhas = stmt.executeUpdate();
+            if (linhas > 0) {
+                JOptionPane.showMessageDialog(null, "Deletado!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhum usuário encontrado com esse ID!");
+            }
             stmt.close();
             conn.close();
 
-        }catch(Exception e){e.printStackTrace();
+        }catch(NumberFormatException nfe){
+            JOptionPane.showMessageDialog(null, "ID inválido! Informe apenas números.");
+        }catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao excluir usuário!");
         }
     }//GEN-LAST:event_btnexcluirActionPerformed
 

@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 public class CadastroAluno extends javax.swing.JFrame {
 
@@ -38,7 +39,7 @@ public class CadastroAluno extends javax.swing.JFrame {
 
         lbltelefone.setText("Telefone");
 
-        lblendereco.setText("Endere�o");
+        lblendereco.setText("Endereço");
 
         lblturma.setText("Turma");
 
@@ -132,31 +133,56 @@ public class CadastroAluno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnokActionPerformed
+        if (txtnome.getText().trim().isEmpty() || txtidade.getText().trim().isEmpty()
+                || txttelefone.getText().trim().isEmpty() || txtendereco.getText().trim().isEmpty()
+                || txtturma.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+            return;
+        }
+
         try{
            Connection conn = conexao.Conexao.conectar();
-           
-           String sql = "INSERT INTO aluno (nome,idade, telefone, endereco, turma) VALUES (?,?,?,?,?)";
+
+           // busca o id da turma pelo nome digitado
+           String sqlTurma = "SELECT id_turma FROM turma WHERE nome=?";
+           PreparedStatement stmtTurma = conn.prepareStatement(sqlTurma);
+           stmtTurma.setString(1, txtturma.getText().trim());
+           ResultSet rsTurma = stmtTurma.executeQuery();
+
+           if (!rsTurma.next()) {
+               JOptionPane.showMessageDialog(null, "Turma não encontrada! Cadastre a turma antes.");
+               stmtTurma.close();
+               conn.close();
+               return;
+           }
+           int idTurma = rsTurma.getInt("id_turma");
+           stmtTurma.close();
+
+           String sql = "INSERT INTO aluno (nome, idade, telefone, endereco, id_turma) VALUES (?,?,?,?,?)";
        PreparedStatement stmt = conn.prepareStatement(sql);
-       
+
        stmt.setString(1, txtnome.getText());
        stmt.setInt(2, Integer.parseInt(txtidade.getText()));
-       stmt.setInt(3, Integer.parseInt(txttelefone.getText()));
+       stmt.setString(3, txttelefone.getText());
        stmt.setString(4, txtendereco.getText());
-       stmt.setString(4, txtturma.getText());
-       
+       stmt.setInt(5, idTurma);
+
        stmt.execute();
-       
+
        JOptionPane.showMessageDialog(null, "Salvo!");
-       
+
        stmt.close();
        conn.close();
+}catch(NumberFormatException nfe) {
+    JOptionPane.showMessageDialog(null, "Idade inválida! Informe apenas números.");
 }catch(Exception e) {
     e.printStackTrace();
+    JOptionPane.showMessageDialog(null, "Erro ao cadastrar aluno!");
 }
     }//GEN-LAST:event_btnokActionPerformed
 
     private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
-        Gestor tela = new Gestor();
+        MenuPrincipal tela = new MenuPrincipal();
        tela.setVisible (true);
        
        this.dispose();

@@ -37,28 +37,28 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
         lblgerenciador.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblgerenciador.setText("Gerenciador");
 
-        btnusuario.setText("Criar usuário");
+        btnusuario.setText("Criar usuÃ¡rio");
         btnusuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnusuarioActionPerformed(evt);
             }
         });
 
-        btneditar.setText("Editar usuário");
+        btneditar.setText("Editar usuÃ¡rio");
         btneditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btneditarActionPerformed(evt);
             }
         });
 
-        btnlistar.setText("Listar usuário");
+        btnlistar.setText("Listar usuÃ¡rio");
         btnlistar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnlistarActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Excluir usuário");
+        jButton4.setText("Excluir usuÃ¡rio");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -143,7 +143,7 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvoltarActionPerformed
-         Gestor tela = new Gestor();
+         MenuPrincipal tela = new MenuPrincipal();
        tela.setVisible (true);
        
        this.dispose();
