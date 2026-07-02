@@ -78,7 +78,7 @@ public class LançamentodeNotas extends javax.swing.JFrame {
                         .addGap(76, 76, 76)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField1)
-                            .addComponent(jComboBox1, 0, 100, Short.MAX_VALUE)))
+                            .addComponent(jComboBox1, 0, 119, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(jLabel1))
@@ -87,7 +87,7 @@ public class LançamentodeNotas extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btn_adict, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                             .addComponent(btn_back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +114,7 @@ public class LançamentodeNotas extends javax.swing.JFrame {
 
     private void btn_adictActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adictActionPerformed
         if (jComboBox1.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Cadastre um aluno antes de lanÃ§ar notas!");
+            JOptionPane.showMessageDialog(null, "Cadastre um aluno antes de lançar notas!");
             return;
         }
         if (jTextField1.getText().trim().isEmpty()) {
@@ -133,14 +133,14 @@ public class LançamentodeNotas extends javax.swing.JFrame {
 
             Connection conn = conexao.Conexao.conectar();
 
-            // busca o id do aluno pelo nome selecionado no combo
+            
             String sqlAluno = "SELECT id_aluno FROM aluno WHERE nome=?";
             PreparedStatement stmtAluno = conn.prepareStatement(sqlAluno);
             stmtAluno.setString(1, nomeAluno);
             ResultSet rsAluno = stmtAluno.executeQuery();
 
             if (!rsAluno.next()) {
-                JOptionPane.showMessageDialog(null, "Aluno nÃ£o encontrado!");
+                JOptionPane.showMessageDialog(null, "Aluno não encontrado!");
                 stmtAluno.close();
                 conn.close();
                 return;
@@ -156,7 +156,7 @@ public class LançamentodeNotas extends javax.swing.JFrame {
             stmt.close();
             conn.close();
 
-            JOptionPane.showMessageDialog(null, "Nota lansada com sucesso!");
+            JOptionPane.showMessageDialog(null, "Nota lançada com sucesso!");
             jTextField1.setText("");
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(null, "Nota invalida! Use apenas numeros (ex: 8.5)");
@@ -217,4 +217,4 @@ public class LançamentodeNotas extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblaluno;
     // End of variables declaration//GEN-END:variables
-}
+

@@ -143,14 +143,14 @@ public class CadastroAluno extends javax.swing.JFrame {
         try{
            Connection conn = conexao.Conexao.conectar();
 
-           // busca o id da turma pelo nome digitado
+           
            String sqlTurma = "SELECT id_turma FROM turma WHERE nome=?";
            PreparedStatement stmtTurma = conn.prepareStatement(sqlTurma);
            stmtTurma.setString(1, txtturma.getText().trim());
            ResultSet rsTurma = stmtTurma.executeQuery();
 
            if (!rsTurma.next()) {
-               JOptionPane.showMessageDialog(null, "Turma n√£o encontrada! Cadastre a turma antes.");
+               JOptionPane.showMessageDialog(null, "Turma n„o encontrada! Cadastre a turma antes.");
                stmtTurma.close();
                conn.close();
                return;
@@ -174,7 +174,7 @@ public class CadastroAluno extends javax.swing.JFrame {
        stmt.close();
        conn.close();
 }catch(NumberFormatException nfe) {
-    JOptionPane.showMessageDialog(null, "Idade inv√°lida! Informe apenas n√∫meros.");
+    JOptionPane.showMessageDialog(null, "Idade inv·lida! Informe apenas n˙meros.");
 }catch(Exception e) {
     e.printStackTrace();
     JOptionPane.showMessageDialog(null, "Erro ao cadastrar aluno!");
