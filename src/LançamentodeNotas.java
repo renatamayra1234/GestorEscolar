@@ -1,3 +1,9 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -30,8 +36,8 @@ public class LançamentodeNotas extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_adict = new javax.swing.JButton();
+        btn_back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,9 +50,19 @@ public class LançamentodeNotas extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Lançamento de Notas");
 
-        jButton1.setText("Adicionar");
+        btn_adict.setText("Adicionar");
+        btn_adict.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_adictActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Voltar");
+        btn_back.setText("Voltar");
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,20 +76,18 @@ public class LançamentodeNotas extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(lblaluno))
                         .addGap(76, 76, 76)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1)
+                            .addComponent(jComboBox1, 0, 100, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
+                        .addGap(34, 34, 34)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jButton2)))))
-                .addContainerGap(100, Short.MAX_VALUE))
+                        .addGap(106, 106, 106)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_adict, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(btn_back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,15 +102,76 @@ public class LançamentodeNotas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addComponent(btn_adict)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_back)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_adictActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adictActionPerformed
+        if (jComboBox1.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Cadastre um aluno antes de lanÃ§ar notas!");
+            return;
+        }
+        if (jTextField1.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Informe a nota!");
+            return;
+        }
+
+        try {
+            double nota = Double.parseDouble(jTextField1.getText().trim().replace(",", "."));
+            if (nota < 0 || nota > 10) {
+                JOptionPane.showMessageDialog(null, "A nota deve estar entre 0 e 10!");
+                return;
+            }
+
+            String nomeAluno = (String) jComboBox1.getSelectedItem();
+
+            Connection conn = conexao.Conexao.conectar();
+
+            // busca o id do aluno pelo nome selecionado no combo
+            String sqlAluno = "SELECT id_aluno FROM aluno WHERE nome=?";
+            PreparedStatement stmtAluno = conn.prepareStatement(sqlAluno);
+            stmtAluno.setString(1, nomeAluno);
+            ResultSet rsAluno = stmtAluno.executeQuery();
+
+            if (!rsAluno.next()) {
+                JOptionPane.showMessageDialog(null, "Aluno nÃ£o encontrado!");
+                stmtAluno.close();
+                conn.close();
+                return;
+            }
+            int idAluno = rsAluno.getInt("id_aluno");
+            stmtAluno.close();
+
+            String sql = "INSERT INTO nota (id_aluno, nota) VALUES (?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idAluno);
+            stmt.setDouble(2, nota);
+            stmt.execute();
+            stmt.close();
+            conn.close();
+
+            JOptionPane.showMessageDialog(null, "Nota lansada com sucesso!");
+            jTextField1.setText("");
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(null, "Nota invalida! Use apenas numeros (ex: 8.5)");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao lançar nota!");
+        }
+    }
+    }//GEN-LAST:event_btn_adictActionPerformed
+
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        MenuPrincipal tela = new MenuPrincipal();
+        tela.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_backActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,8 +209,8 @@ public class LançamentodeNotas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btn_adict;
+    private javax.swing.JButton btn_back;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

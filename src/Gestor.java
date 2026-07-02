@@ -34,7 +34,7 @@ public class Gestor extends javax.swing.JFrame {
         lblgestor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblgestor.setText("Gestor");
 
-        lblusuario.setText("Usu√°rio:");
+        lblusuario.setText("Usu·rio:");
 
         lblsenha.setText("Senha:");
 
@@ -45,6 +45,12 @@ public class Gestor extends javax.swing.JFrame {
             }
         });
 
+        txtlogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtloginActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -52,28 +58,28 @@ public class Gestor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addComponent(lblgestor))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
+                        .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblsenha)
-                            .addComponent(lblusuario))
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtlogin)
-                            .addComponent(jpsenha, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)))
+                            .addComponent(lblusuario)
+                            .addComponent(lblsenha))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jpsenha, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addComponent(btnentrar)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                        .addGap(121, 121, 121)
+                        .addComponent(btnentrar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(lblgestor)))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(23, 23, 23)
                 .addComponent(lblgestor)
-                .addGap(34, 34, 34)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblusuario)
                     .addComponent(txtlogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -81,9 +87,9 @@ public class Gestor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblsenha)
                     .addComponent(jpsenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnentrar)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -92,14 +98,14 @@ public class Gestor extends javax.swing.JFrame {
     private void btnentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnentrarActionPerformed
 
         if (txtlogin.getText().trim().isEmpty() || jpsenha.getPassword().length == 0) {
-            JOptionPane.showMessageDialog(null, "Preencha usu√°rio e senha!");
+            JOptionPane.showMessageDialog(null, "Preencha usuario e senha!");
             return;
         }
 
         try {
             Connection conn = conexao.Conexao.conectar();
             if (conn == null) {
-                JOptionPane.showMessageDialog(null, "N√£o foi poss√≠vel conectar ao banco de dados!");
+                JOptionPane.showMessageDialog(null, "N„o foi possi≠vel conectar ao banco de dados!");
                 return;
             }
 
@@ -116,7 +122,7 @@ public class Gestor extends javax.swing.JFrame {
                 MenuPrincipal tela = new MenuPrincipal();
                 tela.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null, "Usu√°rio ou senha incorretos!");
+                JOptionPane.showMessageDialog(null, "Usuario ou senha incorretos!");
             }
             stmt.close();
             conn.close();
@@ -126,6 +132,10 @@ public class Gestor extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnentrarActionPerformed
+
+    private void txtloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtloginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtloginActionPerformed
 
     /**
      * @param args the command line arguments

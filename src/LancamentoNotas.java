@@ -181,13 +181,13 @@ public class LancamentoNotas extends javax.swing.JFrame {
             stmt.close();
             conn.close();
 
-            JOptionPane.showMessageDialog(null, "Nota lançada com sucesso!");
+            JOptionPane.showMessageDialog(null, "Nota lansada com sucesso!");
             jTextField1.setText("");
         } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(null, "Nota inválida! Use apenas números (ex: 8.5)");
+            JOptionPane.showMessageDialog(null, "Nota invalida! Use apenas numeros (ex: 8.5)");
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro ao lançar nota!");
+            JOptionPane.showMessageDialog(null, "Erro ao lan�ar nota!");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
